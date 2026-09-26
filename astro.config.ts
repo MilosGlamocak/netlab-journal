@@ -60,10 +60,10 @@ export default defineConfig({
   },
   fonts: [
     {
-      name: "Inter",
-      cssVariable: "--font-inter",
+      name: "Google Sans Code",
+      cssVariable: "--font-google-sans-code",
       provider: fontProviders.google(),
-      fallbacks: ["sans-serif"],
+      fallbacks: ["monospace"],
       weights: [300, 400, 500, 600, 700],
       styles: ["normal", "italic"],
       formats: ["woff", "ttf"],

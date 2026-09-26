@@ -7,7 +7,7 @@
 
 @layer base {
   html {
-    font-size: 106.25%;
+    font-size: 110%;
   }
   * {
     @apply border-border outline-accent/75;
