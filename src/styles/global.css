@@ -6,6 +6,9 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @layer base {
+  html {
+    font-size: 106.25%;
+  }
   * {
     @apply border-border outline-accent/75;
     scrollbar-width: auto;
@@ -23,7 +26,7 @@
 }
 
 @utility max-w-app {
-  @apply max-w-4xl;
+  @apply max-w-5xl;
 }
 
 @utility app-layout {
