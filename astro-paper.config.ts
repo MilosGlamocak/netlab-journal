@@ -3,7 +3,7 @@ import { defineAstroPaperConfig } from "./src/types/config";
 export default defineAstroPaperConfig({
   site: {
     url: "https://TODO-your-domain.example/",
-    title: "TODO: Site title (e.g. networking blog name)",
+    title: "NetLab Blog",
     description: "TODO: One-line site description for SEO/meta tags.",
     author: "TODO: Your name",
     profile: "TODO: link to your profile site, or remove this line",
