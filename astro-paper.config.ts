@@ -2,11 +2,11 @@ import { defineAstroPaperConfig } from "./src/types/config";
 
 export default defineAstroPaperConfig({
   site: {
-    url: "https://TODO-your-domain.example/",
-    title: "NetLab Blog",
-    description: "TODO: One-line site description for SEO/meta tags.",
-    author: "TODO: Your name",
-    profile: "TODO: link to your profile site, or remove this line",
+    url: "https://netlabjournal.vercel.app/",
+    title: "Netlab Journal",
+    description: "Dnevnik učenja jednog full-stack developera koji prelazi u mrežno inženjerstvo — containerlab labovi sa Nokia SR Linux, VyOS i drugim mrežnim OS-ovima, korak po korak.",
+    author: "Miloš Glamočak",
+    profile: "https://www.linkedin.com/in/milos-g-421100203/",
     ogImage: "default-og.jpg",
     lang: "en",
     timezone: "Europe/Sarajevo",
@@ -24,14 +24,14 @@ export default defineAstroPaperConfig({
     showBackButton: true,
     editPost: {
       enabled: true,
-      url: "https://github.com/TODO-your-username/netlab-blog/edit/main/",
+      url: "https://github.com/MilosGlamocak/netlab-journal/edit/main/",
     },
     search: "pagefind",
   },
   socials: [
-    { name: "github",   url: "https://github.com/TODO-your-username" },
-    { name: "linkedin", url: "https://www.linkedin.com/in/TODO-your-linkedin/" },
-    { name: "mail",     url: "mailto:TODO-your-email@example.com" },
+    { name: "github",   url: "https://github.com/MilosGlamocak" },
+    { name: "linkedin", url: "https://www.linkedin.com/in/milos-g-421100203/" },
+    { name: "mail",     url: "mailto:milosglamocak@gmail.com" },
   ],
   shareLinks: [
     { name: "whatsapp", url: "https://wa.me/?text=" },

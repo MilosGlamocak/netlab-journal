@@ -1,10 +1,14 @@
 ---
 author: Sat Naing
-pubDatetime: 2022-09-23T15:22:00Z
+# pubDatetime pushed far into the future so this template post stays live in
+# `astro dev` (postFilter.ts bypasses the date check in dev) but is excluded
+# from production builds/listings without touching `draft` (which hides it
+# everywhere, including dev).
+pubDatetime: 2099-01-01T00:00:00Z
 modDatetime: 2026-06-03T00:00:00.000Z
 title: Adding new posts in AstroPaper theme
 slug: adding-new-posts-in-astropaper-theme
-featured: true
+featured: false
 draft: false
 tags:
   - docs
