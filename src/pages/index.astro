@@ -35,7 +35,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
   >
     <section id="hero" class="border-border border-b pt-8 pb-6">
       <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        Mingalaba
+        Zdravo, ja sam Miloš
       </h1>
       <a
         target="_blank"
@@ -53,20 +53,20 @@ const homePath = getRelativeLocaleUrl(locale, "");
       </a>
 
       <p>
-        AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
-        blog theme. This theme follows best practices and provides accessibility
-        out of the box. Light and dark mode are supported by default. Moreover,
-        additional color schemes can also be configured.
+        Zamislio sam da Netlab Journal bude moj dnevnik učenja u kojem ću prikazati kako moju full-stack web development
+        pozadinu koristim da uđem u mrežno inženjerstvo i security. Ovdje
+        dokumentujem containerlab labove — sa Nokia SR Linux, VyOS i drugim
+        mrežnim OS-ovima — hronološki, sa svim greškama i debug-om sa kojim se susrećem tokom kreiranja topologija.
       </p>
       <p class="mt-2">
-        Read the blog posts or check{" "}
+        Pročitaj postove ispod, ili baci pogled na{" "}
         <LinkButton
           class="hover:text-accent underline decoration-dashed underline-offset-4"
-          href="https://github.com/satnaing/astro-paper#readme"
+          href={getRelativeLocaleUrl(locale, "about")}
         >
-          README
+          O meni
         </LinkButton>{" "}
-        for more info.
+        za pun kontekst.
       </p>
       {
         socials.length > 0 && (
