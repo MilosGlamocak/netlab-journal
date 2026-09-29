@@ -13,11 +13,11 @@ tags:
 description: "Prvi lab u seriji: site-to-site konekcija između dva LAN-a preko dva Nokia SR Linux rutera u containerlab okruženju — korak po korak, uz sve prepreke i rješenja usput."
 ---
 
+Prvi lab koji sam planirao da obradim je jednostavna site-to-site konekcija između dva LAN-a. Koristiću dva SR Linux rutera kao default gateway za svaki od tih LAN-ova i po jednu Alpine Linux instancu koja će da simulira po jedan endpoint u svakoj mreži.
+
 ## Table of contents
 
 ## Faza 1 – Topologija i prvi deploy
-
-Prvi lab koji sam planirao da obradim je jednostavna site-to-site konekcija između dva LAN-a. Koristiću dva SR Linux rutera kao default gateway za svaki od tih LAN-ova i po jednu Alpine Linux instancu koja će da simulira po jedan endpoint u svakoj mreži.
 
 Dve interne mreže će da imaju subnete `192.168.100.0/24` i `192.168.200.0/24`, dok će veza između dva rutera da bude dosta uži subnet `10.0.0.0/30` (mogao sam da koristim i `/31` prefiks dužine ali sam se tada opredijelio za `/30`).
 
