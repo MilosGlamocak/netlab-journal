@@ -123,15 +123,29 @@ ip route 192.168.200.0 255.255.255.0 10.0.0.2
 
 ali u SRL bih bez AI pomoći bio izgubljen. Shvatio sam da je moj jedini spas u ovom labu što teoretski znam šta bi trebao biti sljedeći korak, a da za sve ostalo mogu da dam instrukcije AI agentu koji će da pretraži dokumentaciju umjesto mene i predloži konkretne akcije shodno sa mojim zahtjevima.
 
-Shvatio sam da Nokia SRL takođe ne prima next-hop rutu direktno, nego joj treba nešto što se zove `next-hop-group` (kao što samo ime kaže, objekat koji sadrži više mogućih next hopova ka destinacijama). Jedan od benefita ovog pristupa je moguća konfiguracija ECMP load-balancing-a.
+Shvatio sam da Nokia SRL takođe ne prima next-hop rutu direktno, nego joj treba nešto što se zove `next-hop-group` (kao što samo ime kaže, objekat koji sadrži više mogućih next hopova ka destinacijama). Jedan od benefita ovog pristupa je moguća konfiguracija ECMP load-balancing-a. Na srl1 je to izgledalo ovako:
+
+```
+--{ candidate shared default }--[  ]--
+A:srl1# set network-instance default next-hop-groups group to-srl2 nexthop 0 ip-address 10.0.0.2
+--{ * candidate shared default }--[  ]--
+A:srl1# set network-instance default static-routes route 192.168.200.0/24 next-hop-group to-srl2
+```
+
+Na srl2 je konfiguracija mirror-ovana (`to-srl1` next-hop-group sa `10.0.0.1`, static ruta ka `192.168.100.0/24`).
 
 ## Faza 4 – Adresiranje klijenata
 
 Pokušao sam da se konektujem na jednog od Alpine klijenata, ali mi je pokušaj SSH konekcije na njega vraćao "connection refused". Ispostavilo se da je to zato što Alpine image nema SSH server po default-u (dok ga SR Linux uređaji imaju odmah aktivnog). To znači da je standardna praksa za konektovanje na ovakve lagane klijentske uređaje u Docker-u `docker exec -it ... sh`. Nakon uspješne konekcije uspio sam da ručno adresiram klijente sa Linux komandama:
 
-- `ip addr add 192.168.100.1/24 dev eth1`
-- `ip link set eth1 up`
-- `ip route add default via 192.168.100.254 dev eth1`
+```
+$ docker exec -it client1 sh
+/ # ip addr add 192.168.100.1/24 dev eth1
+/ # ip link set eth1 up
+/ # ip route add default via 192.168.100.254 dev eth1
+```
+
+Isto i za `client2`, samo sa `192.168.200.1/24` i default gateway-em `192.168.200.254`.
 
 ## Faza 5 – "no-ip-config" debug
 
@@ -153,4 +167,79 @@ Kako bi Alpine config preživio redeploy, morao sam da ga upišem u `exec` blok 
 
 Kako na Github ne bih push-ovao i full lab folder sa živim kontejnerima, pored napravljenog `.gitignore` fajla, takođe sam morao da izvučem full config komande za oba rutera kako bi ih mogao referencirati kao startni config u `sudo containerlab deploy`. Napisao sam dva `.cli` fajla u `/configs` podfolderu sa nazivima `srl1` i `srl2`.
 
+```yaml file="site2site-static.clab.yml"
+name: site2site-static
+
+topology:
+  nodes:
+    srl1:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:24.10
+      startup-config: configs/srl1.cli
+    srl2:
+      kind: nokia_srlinux
+      image: ghcr.io/nokia/srlinux:24.10
+      startup-config: configs/srl2.cli
+    client1:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 192.168.100.1/24 dev eth1
+        - ip link set eth1 up
+        - ip route replace default via 192.168.100.254 dev eth1
+    client2:
+      kind: linux
+      image: alpine:latest
+      exec:
+        - ip addr add 192.168.200.1/24 dev eth1
+        - ip link set eth1 up
+        - ip route replace default via 192.168.200.254 dev eth1
+  links:
+    # <-> between 2 routers
+    - endpoints: ["srl1:e1-2", "srl2:e1-2"]
+    # <-> between router1 and client1
+    - endpoints: ["srl1:e1-1", "client1:eth1"]
+    # <-> between router2 and client2
+    - endpoints: ["srl2:e1-1", "client2:eth1"]
+```
+
+A `startup-config` fajlovi za oba rutera:
+
+```txt file="configs/srl1.cli"
+set / interface ethernet-1/1 admin-state enable
+set / interface ethernet-1/1 subinterface 0 admin-state enable
+set / interface ethernet-1/1 subinterface 0 ipv4 admin-state enable
+set / interface ethernet-1/1 subinterface 0 ipv4 address 192.168.100.254/24
+set / interface ethernet-1/2 admin-state enable
+set / interface ethernet-1/2 subinterface 0 admin-state enable
+set / interface ethernet-1/2 subinterface 0 ipv4 admin-state enable
+set / interface ethernet-1/2 subinterface 0 ipv4 address 10.0.0.1/30
+set / network-instance default interface ethernet-1/1.0
+set / network-instance default interface ethernet-1/2.0
+set / network-instance default next-hop-groups group to-srl2 nexthop 0 ip-address 10.0.0.2
+set / network-instance default static-routes route 192.168.200.0/24 next-hop-group to-srl2
+```
+
+```txt file="configs/srl2.cli"
+set / interface ethernet-1/1 admin-state enable
+set / interface ethernet-1/1 subinterface 0 admin-state enable
+set / interface ethernet-1/1 subinterface 0 ipv4 admin-state enable
+set / interface ethernet-1/1 subinterface 0 ipv4 address 192.168.200.254/24
+set / interface ethernet-1/2 admin-state enable
+set / interface ethernet-1/2 subinterface 0 admin-state enable
+set / interface ethernet-1/2 subinterface 0 ipv4 admin-state enable
+set / interface ethernet-1/2 subinterface 0 ipv4 address 10.0.0.2/30
+set / network-instance default interface ethernet-1/1.0
+set / network-instance default interface ethernet-1/2.0
+set / network-instance default next-hop-groups group to-srl1 nexthop 0 ip-address 10.0.0.1
+set / network-instance default static-routes route 192.168.100.0/24 next-hop-group to-srl1
+```
+
 Nakon što sam testirao da lab radi od nule, sačuvao sam ga na javnom GitHub repozitorijumu na linku: [github.com/MilosGlamocak/network-labs](https://github.com/MilosGlamocak/network-labs/tree/master). Nakon ovog nastavljam sa upoznavanjem containerlab-a i Nokia SRL uređaja kroz još par ne toliko složenih lab-ova, prije nego što se bacim na neke malo kompleksnije topologije.
+
+> [!TIP] Ključne lekcije iz ovog laba
+> - SR Linux radi na candidate/running modelu – izmjene se prvo pišu u candidate, pa se `commit`-uju, slično kao `git diff` prije push-a.
+> - Svaki L3 subinterface mora eksplicitno biti vezan za `network-instance` (čak i za `default`) – dodavanje adrese same po sebi nije dovoljno.
+> - `admin-state enable` uključuje interfejs/subinterface, ali IPv4 protokol na njemu treba posebno uključiti sa `ipv4 admin-state enable` – bez toga se dobija `no-ip-config` error.
+> - Static rute ne idu direktno na next-hop, nego preko `next-hop-group` objekta – što uzgred otvara vrata ka ECMP-u.
+> - `ip route add default` na Linux hostovima ne prepisuje postojeću default rutu – za to se koristi `ip route replace default`.

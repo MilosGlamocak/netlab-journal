@@ -3,6 +3,13 @@ title: "O meni"
 description: "Kontekst iza ovog bloga — zašto ga pišem i kako se pripremam za seriju containerlab labova."
 ---
 
+## Ukratko
+
+- Full-stack web developer, godinu i po iskustva, prelazim u mrežno inženjerstvo/security
+- CCNA položen, trenutno gradim praktično iskustvo kroz containerlab labove (Nokia SR Linux, VyOS, OPNsense...) i učim za FortiOS Administrator NSE4 ispit 
+- Svaki lab je dokumentovan hronološki — sa svim greškama i debug-om
+- Sve konfiguracije su javno dostupne na [GitHub-u](https://github.com/MilosGlamocak)
+
 ## Kontekst
 
 Ovaj serijal pravim kako bih dokumentovao svoje učenje u mrežnoj struci. Prethodno znanje iz mreža bih opisao kao tehnički šturo, ali teoretski solidno, te mogu da se snađem u raznim tekstovima i razumijem proces razmišljanja iza nekog stvarnog rješenja. Imam tehničko razumijevanje u IT-u prvenstveno preko development pozadine (imam godinu i po iskustva u full-stack web developmentu). Dobar dio trenutnog razumijevanja mreža sam stekao i preko učenja za CCNA ispit, koji sam nedavno položio.
