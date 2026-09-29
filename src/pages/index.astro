@@ -3,5 +3,24 @@ import { getRelativeLocaleUrl } from "astro:i18n";
 import { defaultLocale } from "@/i18n/locales";
 
 // "/" has no content of its own: send visitors to the default language.
-return Astro.redirect(getRelativeLocaleUrl(defaultLocale, ""));
+// Astro's built-in redirect page always waits 2 seconds and can't be
+// configured, so this page redirects immediately instead.
+const target = getRelativeLocaleUrl(defaultLocale, "");
 ---
+
+<!doctype html>
+<html lang={defaultLocale}>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Netlab Journal</title>
+    <meta name="robots" content="noindex" />
+    <link rel="canonical" href={new URL(target, Astro.site ?? Astro.url)} />
+    <meta http-equiv="refresh" content={`0;url=${target}`} />
+    <script is:inline define:vars={{ target }}>
+      location.replace(target + location.search + location.hash);
+    </script>
+  </head>
+  <body>
+    <a href={target}>Netlab Journal</a>
+  </body>
+</html>

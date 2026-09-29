@@ -38,7 +38,7 @@ export default defineConfig({
     defaultLocale,
     routing: {
       prefixDefaultLocale: true,
-      redirectToDefaultLocale: true,
+      redirectToDefaultLocale: false,
     },
   },
   markdown: {
