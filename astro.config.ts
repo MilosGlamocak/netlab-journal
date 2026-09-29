@@ -18,21 +18,27 @@ import {
 } from "@shikijs/transformers";
 import { transformerFileName } from "./src/utils/transformers/fileName";
 import config from "./astro-paper.config";
+import { defaultLocale, locales } from "./src/i18n/locales";
 
 export default defineConfig({
   site: config.site.url,
   integrations: [
     mdx(),
     sitemap({
+      i18n: {
+        defaultLocale,
+        locales: Object.fromEntries(locales.map(l => [l, l])),
+      },
       filter: page =>
         config.features?.showArchives !== false || !page.endsWith("/archives/"),
     }),
   ],
   i18n: {
-    locales: ["en"],
-    defaultLocale: "en",
+    locales: [...locales],
+    defaultLocale,
     routing: {
-      prefixDefaultLocale: false,
+      prefixDefaultLocale: true,
+      redirectToDefaultLocale: true,
     },
   },
   markdown: {

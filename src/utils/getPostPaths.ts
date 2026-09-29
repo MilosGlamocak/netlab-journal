@@ -1,18 +1,28 @@
 import { getRelativeLocaleUrl } from "astro:i18n";
 import { BLOG_PATH } from "@/content.config";
+import { defaultLocale, isLocale, type Locale } from "@/i18n/locales";
 import { slugifyStr } from "./slugify";
 import config from "@/config";
 
 function getPostPathSegments(filePath: string | undefined): string[] {
-  return (
+  const segments =
     filePath
       ?.replace(BLOG_PATH, "")
       .split("/")
       .filter(path => path !== "")
       .filter(path => !path.startsWith("_"))
-      .slice(0, -1)
-      .map(segment => slugifyStr(segment)) ?? []
-  );
+      .slice(0, -1) ?? [];
+
+  // The first folder is the post's language (e.g. `sr/`, `en/`); it is not part of the URL.
+  if (isLocale(segments[0])) segments.shift();
+
+  return segments.map(segment => slugifyStr(segment));
+}
+
+/** Returns the language folder a post lives in (`src/content/posts/<locale>/...`). */
+export function getPostLocale(filePath: string | undefined): Locale {
+  const first = filePath?.replace(BLOG_PATH, "").split("/").find(Boolean);
+  return isLocale(first) ? first : defaultLocale;
 }
 
 function getIdSlug(id: string): string {

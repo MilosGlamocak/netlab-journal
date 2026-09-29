@@ -1,4 +1,12 @@
 export interface UIStrings {
+  meta: {
+    homeTitle: string;
+    description: string;
+  };
+  language: {
+    label: string;
+    fallbackNotice: string;
+  };
   nav: {
     home: string;
     posts: string;
@@ -30,6 +38,11 @@ export interface UIStrings {
     featured: string;
     recentPosts: string;
     allPosts: string;
+    heroTitle: string;
+    heroIntro: string;
+    heroAboutBefore: string;
+    heroAboutLink: string;
+    heroAboutAfter: string;
   };
   footer: {
     copyright: string;

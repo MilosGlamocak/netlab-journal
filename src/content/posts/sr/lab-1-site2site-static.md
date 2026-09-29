@@ -1,7 +1,6 @@
 ---
 pubDatetime: 2026-09-29T00:00:00Z
 title: "Lab 1: site2site-static"
-slug: lab-1-site2site-static
 featured: true
 draft: false
 tags:
@@ -10,7 +9,7 @@ tags:
   - networking
   - static-routing
   - ccna
-description: "Prvi lab u seriji: site-to-site konekcija između dva LAN-a preko dva Nokia SR Linux rutera u containerlab okruženju — korak po korak, uz sve prepreke i rješenja usput."
+description: "Prvi lab: site-to-site veza između dva LAN-a preko dva Nokia SR Linux rutera u containerlab-u, sa greškama i rješenjima usput."
 ---
 
 Prvi lab koji sam planirao da obradim je jednostavna site-to-site konekcija između dva LAN-a. Koristiću dva SR Linux rutera kao default gateway za svaki od tih LAN-ova i po jednu Alpine Linux instancu koja će da simulira po jedan endpoint u svakoj mreži.

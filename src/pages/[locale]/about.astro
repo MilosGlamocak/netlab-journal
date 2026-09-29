@@ -1,5 +1,8 @@
 ---
-import { getEntry, render } from "astro:content";
+import { getCollection, render } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import { getLocalePaths, useTranslations } from "@/i18n";
+import { defaultLocale, type Locale } from "@/i18n/locales";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Breadcrumb from "@/components/Breadcrumb.astro";
@@ -7,11 +10,22 @@ import Main from "@/components/Main.astro";
 import Footer from "@/components/Footer.astro";
 import config from "@/config";
 
-const about = await getEntry("pages", "about");
+export function getStaticPaths() {
+  return getLocalePaths();
+}
+
+const locale = Astro.currentLocale as Locale;
+const t = useTranslations(locale);
+
+// Use the translated page if it exists, otherwise the original.
+const pages = await getCollection("pages");
+const findAbout = (l: Locale) => pages.find(page => page.id === `${l}/about`);
+const translated = findAbout(locale);
+const about = translated ?? findAbout(defaultLocale);
 
 if (!about) {
   throw new Error(
-    "Missing content entry: `about.md` or `about.mdx` in `src/content/pages/`"
+    "Missing content entry: `about.md` in `src/content/pages/<locale>/`"
   );
 }
 
@@ -22,11 +36,28 @@ const { Content } = await render(about);
   title={`${about.data.title} | ${config.site.title}`}
   description={about.data.description}
   ogImage={about.data.ogImage}
-  canonicalURL={about.data.canonicalURL}
+  canonicalURL={about.data.canonicalURL ??
+    (translated
+      ? undefined
+      : new URL(
+          getRelativeLocaleUrl(defaultLocale, "about"),
+          Astro.site ?? Astro.url
+        ).href)}
 >
   <Header />
 
   <Breadcrumb />
+
+  {
+    !translated && (
+      <p
+        role="note"
+        class="app-layout text-muted-foreground mt-4 text-sm italic"
+      >
+        {t.language.fallbackNotice}
+      </p>
+    )
+  }
 
   <Main pageTitle={about.data.title} class="app-prose">
     <Content />

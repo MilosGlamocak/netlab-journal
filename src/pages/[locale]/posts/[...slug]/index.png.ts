@@ -5,6 +5,8 @@ import satori from "satori";
 import sharp from "sharp";
 import { getFontPathByWeight } from "@/utils/getFontPathByWeight";
 import { getPostSlug } from "@/utils/getPostPaths";
+import { getLocalizedPosts } from "@/utils/getLocalizedPosts";
+import { locales } from "@/i18n/locales";
 import config from "@/config";
 
 export async function getStaticPaths() {
@@ -12,14 +14,16 @@ export async function getStaticPaths() {
     return [];
   }
 
-  const posts = await getCollection("posts").then(p =>
-    p.filter(({ data }) => !data.draft && !data.ogImage)
-  );
+  const allPosts = await getCollection("posts");
 
-  return posts.map(post => ({
-    params: { slug: getPostSlug(post.id, post.filePath) },
-    props: post,
-  }));
+  return locales.flatMap(locale =>
+    getLocalizedPosts(allPosts, locale)
+      .filter(({ data }) => !data.ogImage)
+      .map(post => ({
+        params: { locale, slug: getPostSlug(post.id, post.filePath) },
+        props: post,
+      }))
+  );
 }
 
 export const GET: APIRoute = async ({ props, url }) => {

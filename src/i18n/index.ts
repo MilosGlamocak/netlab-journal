@@ -1,4 +1,5 @@
 import type { UIStrings } from "./types";
+import { defaultLocale, locales } from "./locales";
 
 export { tplStr } from "./format";
 
@@ -12,7 +13,12 @@ for (const [path, mod] of Object.entries(modules)) {
   translations[locale] = mod.default;
 }
 
-/** Returns UI strings for the given locale, falling back to English. */
-export function useTranslations(locale: string = "en"): UIStrings {
-  return translations[locale] ?? translations["en"];
+/** Returns UI strings for the given locale, falling back to the default locale. */
+export function useTranslations(locale: string = defaultLocale): UIStrings {
+  return translations[locale] ?? translations[defaultLocale];
+}
+
+/** `getStaticPaths` result for pages that only differ by `[locale]`. */
+export function getLocalePaths() {
+  return locales.map(locale => ({ params: { locale } }));
 }
