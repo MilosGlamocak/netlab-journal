@@ -1,6 +1,6 @@
 ---
 pubDatetime: 2026-09-29T00:00:00Z
-title: "Lab 1: site2site-static"
+title: "Lab 1: Site-to-site (static routing)"
 featured: true
 draft: false
 tags:
