@@ -31,7 +31,6 @@ export default defineAstroPaperConfig({
   socials: [
     { name: "github",   url: "https://github.com/MilosGlamocak" },
     { name: "linkedin", url: "https://www.linkedin.com/in/milos-g-421100203/" },
-    { name: "mail",     url: "mailto:milosglamocak@gmail.com" },
   ],
   shareLinks: [
     { name: "whatsapp", url: "https://wa.me/?text=" },

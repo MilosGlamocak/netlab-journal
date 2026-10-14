@@ -32,4 +32,4 @@ Izabrao sam SR Linux kao primarni L3 uređaj za moje labove jer je otvoren (ne "
 
 - GitHub: [github.com/MilosGlamocak](https://github.com/MilosGlamocak)
 - LinkedIn: [linkedin.com/in/milos-g-421100203](https://www.linkedin.com/in/milos-g-421100203/)
-- Email: [milosglamocak@gmail.com](mailto:milosglamocak@gmail.com)
+- Email: milosglamocak[at]gmail[dot]com

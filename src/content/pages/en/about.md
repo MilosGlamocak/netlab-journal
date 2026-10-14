@@ -32,4 +32,4 @@ I picked SR Linux as the primary L3 device for my labs because it's open (not "o
 
 - GitHub: [github.com/MilosGlamocak](https://github.com/MilosGlamocak)
 - LinkedIn: [linkedin.com/in/milos-g-421100203](https://www.linkedin.com/in/milos-g-421100203/)
-- Email: [milosglamocak@gmail.com](mailto:milosglamocak@gmail.com)
+- Email: milosglamocak[at]gmail[dot]com
