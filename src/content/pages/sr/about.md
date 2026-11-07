@@ -6,7 +6,7 @@ description: "Kontekst iza ovog bloga — zašto ga pišem i kako se pripremam z
 ## Ukratko
 
 - Full-stack web developer, godinu i po iskustva, prelazim u mrežno inženjerstvo/security
-- CCNA i NSE4 (FortiOS Administrator) certifikovan, završena FortiOS Administrator 7.6 obuka, a trenutno gradim praktično iskustvo kroz containerlab labove (Nokia SR Linux, VyOS, OPNsense...)
+- CCNA i NSE4 (FortiOS Administrator) sertifikovan, završena FortiOS Administrator 7.6 obuka, a trenutno gradim praktično iskustvo kroz containerlab labove (Nokia SR Linux, VyOS, OPNsense...)
 - Svaki lab je dokumentovan hronološki — sa svim greškama i debug-om
 - Sve konfiguracije su javno dostupne na [GitHub-u](https://github.com/MilosGlamocak)
 
