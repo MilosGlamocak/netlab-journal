@@ -28,6 +28,37 @@ Budući da nemam iskustva ni sa containerlab-om, niti sa Nokia SR Linux, prvih p
 
 Izabrao sam SR Linux kao primarni L3 uređaj za moje labove jer je otvoren (ne "open-source otvoren"), besplatan i čuo sam da se koristi u produkcijskim okruženjima širom svijeta. Alternativa koju sam uspio da nađem je VyOS, mada njega bih morao da pokrećem kao kompletnu virtuelnu mašinu, tako da mi je za sada Nokia SRL favorit.
 
+## Roadmap
+
+Ovo je plan labova koji je podložan promjenama.
+
+1. [Site-to-site (static routing)](/sr/posts/lab-1-site2site-static/)
+2. [ROAS: inter-VLAN rutiranje](/sr/posts/lab-2-roas/)
+3. [ROAS + LAG/LACP](/sr/posts/lab-3-lacp/)
+4. Inter-VLAN filtering sa ACL-om _(sljedeći)_
+5. Spanning Tree: petlja u mreži i šta se desi kad padne root bridge
+6. VRRP
+7. OSPF nad ROAS campusom, uz BFD
+8. Multi-vendor OSPF (SR Linux + FRR)
+9. IS-IS underlay
+10. eBGP prema "ISP-u"
+11. BGP policy: dual-homed korisnik (local-pref, AS-path prepend)
+12. VRF-ovi i route leaking
+13. Site-to-site IPsec preko "interneta"
+14. Firewall sa DMZ-om (VyOS, OPNsense ili FortiGate)
+15. WireGuard za remote access
+16. Monitoring: SNMP, syslog i Grafana
+17. Suricata IDS (nmap skeniranje i alerti)
+18. RADIUS / TACACS+ za login na mrežne uređaje
+19. Wazuh SIEM (ako mi RAM dozvoli)
+20. Python skripta za backup i provjeru konfiguracija
+21. Cijela mreža iz jednog YAML-a: Jinja2 + Ansible
+22. NetBox kao source of truth
+23. GitHub Actions podiže lab i pokreće `verify.sh` na svaki push
+24. Pokvarena mreža: namjerno ubacim greške i dokumentujem kako sam ih našao
+25. Završni lab: firma sa sjedištem, filijalom i "ISP-om", sve podignuto iz koda
+26. Za kraj, iz znatiželje: leaf-spine i EVPN-VXLAN
+
 ## Kontakt
 
 - GitHub: [github.com/MilosGlamocak](https://github.com/MilosGlamocak)

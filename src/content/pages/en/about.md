@@ -28,6 +28,37 @@ Since I have no experience with containerlab or Nokia SR Linux, the first few la
 
 I picked SR Linux as the primary L3 device for my labs because it's open (not "open-source open"), free, and I've heard it's used in production environments around the world. The alternative I found is VyOS, but I would have to run it as a full virtual machine, so for now Nokia SRL is my favorite.
 
+## Roadmap
+
+This is the plan for the labs and it is subject to change.
+
+1. [Site-to-site (static routing)](/en/posts/lab-1-site2site-static/)
+2. [ROAS: inter-VLAN routing](/en/posts/lab-2-roas/)
+3. [ROAS + LAG/LACP](/en/posts/lab-3-lacp/)
+4. Inter-VLAN filtering with an ACL _(next)_
+5. Spanning Tree: a loop in the network and what happens when the root bridge goes down
+6. VRRP
+7. OSPF over the ROAS campus, with BFD
+8. Multi-vendor OSPF (SR Linux + FRR)
+9. IS-IS underlay
+10. eBGP towards an "ISP"
+11. BGP policy: a dual-homed customer (local-pref, AS-path prepend)
+12. VRFs and route leaking
+13. Site-to-site IPsec over the "internet"
+14. A firewall with a DMZ (VyOS, OPNsense or FortiGate)
+15. WireGuard for remote access
+16. Monitoring: SNMP, syslog and Grafana
+17. Suricata IDS (nmap scans and alerts)
+18. RADIUS / TACACS+ for logging in to network devices
+19. Wazuh SIEM (if my RAM allows it)
+20. A Python script for config backup and checking
+21. The whole network from a single YAML: Jinja2 + Ansible
+22. NetBox as a source of truth
+23. GitHub Actions brings the lab up and runs `verify.sh` on every push
+24. A broken network: I deliberately introduce faults and document how I found them
+25. Final lab: a company with a HQ, a branch and an "ISP", all brought up from code
+26. Finally, out of curiosity: leaf-spine and EVPN-VXLAN
+
 ## Contact
 
 - GitHub: [github.com/MilosGlamocak](https://github.com/MilosGlamocak)
