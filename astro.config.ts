@@ -44,8 +44,17 @@ export default defineConfig({
   markdown: {
     processor: unified({
       remarkPlugins: [
-        remarkToc,
-        [remarkCollapse, { test: "Table of contents" }],
+        [remarkToc, { heading: "(table[ -]of[ -])?contents?|toc|sadržaj" }],
+        [
+          remarkCollapse,
+          {
+            test: /^(table of contents|sadržaj)$/i,
+            summary: (title: string) =>
+              /^sadržaj$/i.test(title)
+                ? `Otvori ${title.toLowerCase()}`
+                : `Open ${title}`,
+          },
+        ],
       ],
       rehypePlugins: [rehypeCallouts],
     }),

@@ -14,7 +14,7 @@ description: "Prvi lab: site-to-site veza između dva LAN-a preko dva Nokia SR L
 
 Prvi lab koji sam planirao da obradim je jednostavna site-to-site konekcija između dva LAN-a. Koristiću dva SR Linux rutera kao default gateway za svaki od tih LAN-ova i po jednu Alpine Linux instancu koja će da simulira po jedan endpoint u svakoj mreži.
 
-## Table of contents
+## Sadržaj
 
 ## Faza 1 – Topologija i prvi deploy
 

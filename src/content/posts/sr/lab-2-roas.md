@@ -17,7 +17,7 @@ Lab koji radim danas je klasična Router on a Stick topologija sa 3 VLAN-a, jedn
 
 Budući da sam u prvom lab-u krenuo da učim Nokia SR Linux NOS, logično bi bilo da nastavim tom putanjom, pa sam odlučio da mi taj NOS služi i za L2 i L3 uređaje u ovom i narednim lab-ovima (Nokia SRL može da radi i kao switch, bez uključenih IP servisa na uređaju).
 
-## Table of contents
+## Sadržaj
 
 ## Faza 1 – Plan i topologija
 
