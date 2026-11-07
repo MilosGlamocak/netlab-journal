@@ -6,7 +6,7 @@ description: "The context behind this blog: why I write it and how I'm preparing
 ## In short
 
 - Full-stack web developer with a year and a half of experience, moving into network engineering/security
-- CCNA certified, currently building hands-on experience through containerlab labs (Nokia SR Linux, VyOS, OPNsense...) and studying for the FortiOS Administrator NSE4 exam
+- CCNA and NSE4 (FortiOS Administrator) certified, completed the FortiOS Administrator 7.6 training, and currently building hands-on experience through containerlab labs (Nokia SR Linux, VyOS, OPNsense...)
 - Every lab is documented chronologically, with all the mistakes and debugging
 - All configurations are publicly available on [GitHub](https://github.com/MilosGlamocak)
 
