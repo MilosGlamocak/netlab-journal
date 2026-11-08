@@ -162,7 +162,12 @@ const ogImage = ogImageUrl
         aria-hidden="true"
         class:list={[
           "text-muted-foreground max-sm:hidden",
-          { hidden: !config.features.editPost?.enabled || hideEditPost },
+          {
+            hidden:
+              !import.meta.env.DEV ||
+              !config.features.editPost?.enabled ||
+              hideEditPost,
+          },
         ]}
       >
         |

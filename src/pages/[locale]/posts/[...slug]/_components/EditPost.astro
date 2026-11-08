@@ -12,9 +12,11 @@ type Props = {
 
 const { hideEditPost, post, class: className = "" } = Astro.props;
 
+// Edit links are visible only in the dev server, never in production builds.
 const editPost = config.features.editPost;
-const href = editPost.enabled ? `${editPost.url}${post.filePath}` : "";
-const showEditPost = editPost.enabled && !hideEditPost && href.trim() !== "";
+const isDev = import.meta.env.DEV;
+const href = isDev && editPost.enabled ? `${editPost.url}${post.filePath}` : "";
+const showEditPost = isDev && editPost.enabled && !hideEditPost && href.trim() !== "";
 
 const t = useTranslations(Astro.currentLocale);
 ---
